@@ -16,15 +16,13 @@
       {x: 110, y: 150}
     ]
 
-    // The user's score
     let score = 0;
 
     // When set to true the snake is changing direction
     let changingDirection = false;
-
     let foodX;
     let foodY;
-
+    // direction for the snake 
     let dx = 10;
     let dy = 0;
 
@@ -121,9 +119,9 @@
       return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
     }
     /**
-     * Generate a random number that is a multiple of 10 given a minumum and a maximum number
-     * @param { number } min - The minimum number the random number can be
-     * @param { number } max - The maximum number the random number can be
+     * Generates a random number that is a multiple of 10 given a min and a max number
+     * min - min number the random number can be
+     * max - max number the random number can be
      */
     function randomTen(min, max) {
       return Math.round((Math.random() * (max-min) + min) / 10) * 10;
@@ -166,7 +164,6 @@
       ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
     /**
-
      * The direction cannot be switched to the opposite direction, to prevent the snake from reversing
      * For example if the the direction is 'right' it cannot become 'left'
      */
@@ -177,9 +174,6 @@
       const DOWN_KEY = 40;
       /**
        * Prevent the snake from reversing
-       * Example scenario:
-       * Snake is moving to the right. User presses down and immediately left
-       * and the snake immediately changes direction without taking a step down first
        */
       if (changingDirection) return;
       changingDirection = true;
