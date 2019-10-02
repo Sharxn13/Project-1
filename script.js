@@ -1,4 +1,5 @@
 // Part 1:
+// Const are block-scoped, much like variables defined using the let statement, value of a const can't be changed through reassignment, and it can't be redeclared.
     const GAME_SPEED = 100;
     const CANVAS_BORDER_COLOUR = 'white';
     const CANVAS_BACKGROUND_COLOUR = "white";
@@ -6,6 +7,7 @@
     const SNAKE_BORDER_COLOUR = 'lightgreen';
     const FOOD_COLOUR = 'red';
     const FOOD_BORDER_COLOUR = 'darkred';
+    //length of snake
     let snake = [
       {x: 150, y: 150},
       {x: 140, y: 150},
@@ -37,6 +39,8 @@
 
     // Create the first food location
     createFood();
+
+
 
     // Call changeDirection whenever a key is pressed
     document.addEventListener("keydown", changeDirection);
@@ -82,16 +86,14 @@
       ctx.fillRect(foodX, foodY, 10, 10);
       ctx.strokeRect(foodX, foodY, 10, 10);
     }
-    /**
-     * Advances the snake by changing the x-coordinates of its parts
-     * according to the horizontal velocity and the y-coordinates of its parts
-     * according to the vertical veolocity
-     */
+
     function advanceSnake() {
       // Create the new Snake's head
       const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
       // Add the new head to the beginning of snake body
-      snake.unshift(head);
+      snake.unshift(head); // unshift adds new items to the beginning of an array, and returns the new length.
+
       const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
       if (didEatFood) {
         // Increase score
@@ -106,8 +108,7 @@
       }
     }
     /**
-     * Returns true if the head of the snake touched another part of the game
-     * or any of the walls
+     * Returns true if the head of the snake touched another part of the game or any of the walls
      */
     function didGameEnd() {
       for (let i = 4; i < snake.length; i++) {
@@ -120,8 +121,7 @@
       return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
     }
     /**
-     * Generates a random number that is a multiple of 10 given a minumum
-     * and a maximum number
+     * Generate a random number that is a multiple of 10 given a minumum and a maximum number
      * @param { number } min - The minimum number the random number can be
      * @param { number } max - The maximum number the random number can be
      */
@@ -153,12 +153,11 @@
     }
     /**
      * Draws a part of the snake on the canvas
-     * @param { object } snakePart - The coordinates where the part should be drawn
      */
     function drawSnakePart(snakePart) {
-      // Set the colour of the snake part
+      // Set the color of the snake part
       ctx.fillStyle = "turquoise";
-      // Set the border colour of the snake part
+      // Set the border color of the snake part
       ctx.strokestyle = "lightgreen";
       // Draw a "filled" rectangle to represent the snake part at the coordinates
       // the part is located
@@ -167,12 +166,9 @@
       ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
     }
     /**
-     * Changes the vertical and horizontal velocity of the snake according to the
-     * key that was pressed.
-     * The direction cannot be switched to the opposite direction, to prevent the snake
-     * from reversing
+
+     * The direction cannot be switched to the opposite direction, to prevent the snake from reversing
      * For example if the the direction is 'right' it cannot become 'left'
-     * @param { object } event - The keydown event
      */
     function changeDirection(event) {
       const LEFT_KEY = 37;
